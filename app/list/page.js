@@ -1,5 +1,7 @@
 import { connectDB } from "@/util/database";
-
+import Link from "next/link";
+import { Links } from '@/app/list/detailLINK'
+ 
 export default async function List() {
 const client = await connectDB
 const db = client.db("forum")
@@ -21,7 +23,11 @@ let result = await db.collection("post").find().toArray()
             result.map((v, i) => {
                 return (
                     <div className="list-item">
-                        <h4>{result[i].title}</h4>
+                        {/* 링크태그가 useRoute의 prefetch 기능이에요 */}
+                        <Link prefetch={false} href={"detail"+ "/" + result[i]._id}>
+                            <h4>{result[i].title}</h4>
+                        </Link>
+                        {/* <Links></Links> */}
                         <p>{result[i].content}</p>
                     </div>
                 )
