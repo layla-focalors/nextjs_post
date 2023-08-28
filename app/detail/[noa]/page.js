@@ -10,6 +10,7 @@ export default async function Page(props) {
     const db = client.db("forum")
     // new도 붙여야 해요!
     let result = await db.collection("post").findOne({ _id : new ObjectId(props.params.noa) })
+    console.log(props.params.noa)
     // 유저가 접속한 파라미터에 입력한 값 제공!
     // console.log(result)
     return (

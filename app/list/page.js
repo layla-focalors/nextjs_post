@@ -1,4 +1,5 @@
 import { connectDB } from "@/util/database";
+import { EditorButton } from "@/app/list/editorbutton"
 import Link from "next/link";
 import { Links } from '@/app/list/detailLINK'
  
@@ -29,6 +30,7 @@ let result = await db.collection("post").find().toArray()
                         </Link>
                         {/* <Links></Links> */}
                         <p>{result[i].content}</p>
+                        <EditorButton link={result[i]._id}></EditorButton>
                     </div>
                 )
             })
