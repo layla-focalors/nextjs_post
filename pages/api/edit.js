@@ -22,7 +22,7 @@ export default async function Handler(req, res) {
     }
 
     try{
-        db.collection("post").updateOne({_id : new ObjectId(dataID)}, {$set : {title : newtitle, content : newcontent}})
+        await db.collection("post").updateOne({_id : new ObjectId(dataID)}, {$set : {title : newtitle, content : newcontent}})
     }
     catch(err){
         return res.status(400).json("오류입니다!")

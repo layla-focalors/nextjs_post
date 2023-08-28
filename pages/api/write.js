@@ -25,7 +25,7 @@ export default async function Handler(req, res) {
         // db에 직접 저장은 위험하기에 user -> server -> db 순으로 개발하기!
 
         try {
-            db.collection("post").insertOne(data)
+            await db.collection("post").insertOne(data)
         }
         catch(err){
             console.log(err)

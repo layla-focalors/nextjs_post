@@ -3,6 +3,8 @@ import { EditorButton } from "@/app/list/editorbutton"
 import Link from "next/link";
 import { Links } from '@/app/list/detailLINK'
  
+import { Listitem } from "@/app/list/Listitem"
+
 export default async function List() {
 const client = await connectDB
 const db = client.db("forum")
@@ -20,22 +22,7 @@ let result = await db.collection("post").find().toArray()
 //   console.log(result[0]._id)
     return (
       <div className="list-bg">
-        {
-            result.map((v, i) => {
-                return (
-                    <div className="list-item">
-                        {/* 링크태그가 useRoute의 prefetch 기능이에요 */}
-                        <Link prefetch={false} href={"detail"+ "/" + result[i]._id}>
-                            <h4>{result[i].title}</h4>
-                        </Link>
-                        {/* <Links></Links> */}
-                        <p>{result[i].content}</p>
-                        <EditorButton link={result[i]._id}></EditorButton>
-                    </div>
-                )
-            })
-            // 생략하고 싶다면! {()} 끝 생략 가능!
-        }
+        <Listitem res={result}></Listitem>
       </div>
     )
 }
